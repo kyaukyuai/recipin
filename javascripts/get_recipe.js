@@ -4,12 +4,15 @@ $(function() {
                 crossDomain: true,
                 dataType: "jsonp",
                 success: function(json) {
-                        $('#image1').attr('src', json.result[0].mediumImageUrl);
-                        $('#image2').attr('src', json.result[1].mediumImageUrl);
-                        $('#image3').attr('src', json.result[2].mediumImageUrl);
-                        $('#link1').attr('href', json.result[0].recipeUrl);
-                        $('#link2').attr('href', json.result[1].recipeUrl);
-                        $('#link3').attr('href', json.result[2].recipeUrl);
+                        for( var i=0; i<3; i++) {
+                                if(i==0) {
+                                        $('#recipes').append("<tr class='success'><td><a href=" + json.result[i].recipeUrl + " target='_blank'><img src=" + json.result[i].mediumImageUrl + "></td></tr>");
+                                } else if(i==1) {
+                                        $('#recipes').append("<tr class='warning'><td><a href=" + json.result[i].recipeUrl + " target='_blank'><img src=" + json.result[i].mediumImageUrl + "></td></tr>");
+                                } else if(i==2) {
+                                        $('#recipes').append("<tr class='danger'><td><a href=" + json.result[i].recipeUrl + " target='_blank'><img src=" + json.result[i].mediumImageUrl + "></td></tr>");
+                                }
+                        }
                 }
         });
 });
